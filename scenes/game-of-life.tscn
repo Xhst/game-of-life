@@ -23,6 +23,7 @@ sky = SubResource("Sky_rlvci")
 ambient_light_color = Color(0.8, 0.8, 0.8, 1)
 
 [sub_resource type="TorusMesh" id="TorusMesh_qgkix"]
+inner_radius = 0.35
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_xln1s"]
 top_radius = 5.0
@@ -34,7 +35,7 @@ layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_3mhql")
 compute_shader = "res://shaders/compute.glsl"
-square_size = 254
+square_size = 32
 alive_texture = ExtResource("3_2nbhm")
 dead_texture = ExtResource("4_n85gg")
 
