@@ -27,7 +27,7 @@ or equivalently consider a square and "glue" the opposite sides together. This c
 $$S = [0, 1] \times [0,1] \subseteq \\mathbb{R}^2$$
 the equivalence relation $∼_T$ such that $\forall\ p \in [0,1]$ and $B \in \\{0,1\\}$
 $$x ∼_T y \Longleftrightarrow \bigg(x = y\bigg)\ \lor \bigg(x=(B,p) \land y=(1 - B,p) \bigg) \lor \bigg(x=(p,B) \land y=(p,1 - B) \bigg)$$
-in other words, is a unique interior point or $x$ and $y$ are on two opposite sides and have an equal coordinate, e.g $(1,p) ∼_T (0,p)$.
+in other words, is a unique interior point or $x$ and $y$ are on two opposite sides and have an equal coordinate.
 
 With this equivalence relation, we can define the quotient space $S / {∼_T}$ wich is a topological torus.
 
