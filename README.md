@@ -1,6 +1,6 @@
 # Conway's Game of Life
 
-Conway's **Game of Life** implementation in the **Godot Engine**.
+Conway's **Game of Life** implementation in the **Godot Engine** (v4.2.1).
 
 ---
 
