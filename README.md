@@ -25,8 +25,8 @@ Usually the Game of Life universe is defined as an infinite, two-dimensional, or
 A topological torus is a topological space homeomorphic to a torus in Euclidean space. It can be defined as the product of two circumferences $C^1 \times C^2$
 or equivalently consider a square and "glue" the opposite sides together. This corresponds to defining on the square 
 $$S = [0, 1] \times [0,1] \subseteq \\mathbb{R}^2$$
-the equivalence relation $∼_T$ such that 
-$$x ∼_T y \Longleftrightarrow \bigg(x = y\bigg)\ \lor \bigg(x=(B,p) \land y=(1 - B,p) \bigg) \lor \bigg(x=(p,B) \land y=(p,1 - B) \bigg), \forall\ p \in [0,1]\ and\ B \in \\{0,1\\}$$
+the equivalence relation $∼_T$ such that \forall\ p \in [0,1]\ and\ B \in \\{0,1\\}
+$$x ∼_T y \Longleftrightarrow \bigg(x = y\bigg)\ \lor \bigg(x=(B,p) \land y=(1 - B,p) \bigg) \lor \bigg(x=(p,B) \land y=(p,1 - B) \bigg)$$
 in other words, is a unique interior point or $x$ and $y$ are on two opposite sides and have an equal coordinate. 
 With this equivalence relation, one can define the quotient space $S / {∼_T}$ wich is a topological torus.
 
