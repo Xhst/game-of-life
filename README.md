@@ -28,6 +28,9 @@ the equivalence relation $∼_T$ such that $x ∼_T y \Longleftrightarrow x = y$
 With this equivalence relation, one can define the quotient space $S / {∼_T}$ wich is a topological torus.
 
 ## 🖼️ Screenshots
+#### Simulation with the sample "Gosper's gliders cannon"
+![screenshot 128 cells](./images/screenshots/screenshot-gosper-glider.png)
+
 #### Simulation with 128x128 cells
 ![screenshot 128 cells](./images/screenshots/screenshot-128.png)
 
