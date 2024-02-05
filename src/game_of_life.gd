@@ -1,11 +1,15 @@
 extends Node
 
+@export_range(1, 1000) var update_every_ms: int = 200
+
 @export_file var compute_shader: String
 @export var square_size: int
 
 @export var alive_texture: Texture2D
 @export var dead_texture: Texture2D
 @export var binary_data_texture: Texture2D
+
+@export_range(0.0, 1.0) var noise_frequency: float
 
 @onready var viewport: Viewport = %Viewport2D
 @onready var viewport_sprite: Sprite2D = %ViewportSprite
@@ -15,6 +19,8 @@ var bindings: Array[RDUniform] = []
 
 var rendering_device: RenderingDevice
 var render_texture: ImageTexture
+
+var cell_size: int
 
 var input_image: Image
 var output_image: Image
@@ -31,8 +37,8 @@ var pipeline: RID
 
 
 func _ready():
+	input_image = _get_input_image()
 	output_image = Image.create(square_size, square_size, false, Image.FORMAT_L8)
-	input_image = _get_noise_image()
 	
 	_merge_input_and_output_images()
 	_set_shader_material_from_output_image()
@@ -47,12 +53,21 @@ func _ready():
 	
 	_compute_bindings()
 	
-	_update()
+	_game_process()
+
+
+func _get_input_image() -> Image:
+	if binary_data_texture == null:
+		return _get_noise_image()
+	
+	square_size = int(binary_data_texture.get_size().x)
+	
+	return binary_data_texture.get_image()
 
 
 func _get_noise_image() -> Image:
 	var noise = FastNoiseLite.new()
-	noise.frequency = 0.1
+	noise.frequency = noise_frequency
 	
 	return noise.get_image(square_size, square_size)
 
@@ -80,7 +95,7 @@ func _set_shader_material_from_output_image() -> void:
 	if material == null: 
 		return
 		
-	var cell_size = alive_texture.get_size().x;
+	cell_size = int(alive_texture.get_size().x);
 	
 	material.set_shader_parameter("deadTexture", dead_texture)
 	material.set_shader_parameter("aliveTexture", alive_texture)
@@ -153,16 +168,26 @@ func _create_texture_and_bind_uniform(image: Image, format: RDTextureFormat, bin
 	return texture
 
 
-func _process(_delta: float) -> void:
-	_render()
-	_update()
+func _game_process() -> void:
+	while (true):
+		_update()
+	
+		await sleep(update_every_ms)
+	
+		_render()
+
+func sleep(ms: int):
+	await get_tree().create_timer(float(ms) / 1000.0).timeout 
+
 
 func _update() -> void:
 	var compute_list = rendering_device.compute_list_begin()
 	
+	var groups = 32
+	
 	rendering_device.compute_list_bind_compute_pipeline(compute_list, pipeline)
 	rendering_device.compute_list_bind_uniform_set(compute_list, uniform_set, 0)
-	rendering_device.compute_list_dispatch(compute_list, 32, 32, 1)
+	rendering_device.compute_list_dispatch(compute_list, groups, groups, 1)
 	rendering_device.compute_list_end()
 	rendering_device.submit()
 
