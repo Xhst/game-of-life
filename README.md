@@ -31,8 +31,8 @@ With this equivalence relation, one can define the quotient space $S / {∼_T}$ 
 #### Simulation with the sample "Gosper's gliders cannon"
 ![screenshot 128 cells](./images/screenshots/screenshot-gosper-glider.png)
 
-#### Simulation with 128x128 cells
+#### Simulation 128x128 cells, with initial state from a [Simplex noise](https://en.wikipedia.org/wiki/Simplex_noise) image.
 ![screenshot 128 cells](./images/screenshots/screenshot-128.png)
 
-#### Simulation with 1024x1024 cells
+#### Simulation 1024x1024 cells, with initial state from a [Simplex noise](https://en.wikipedia.org/wiki/Simplex_noise) image.
 ![screenshot 1024 cells](./images/screenshots/screenshot-1024.png)
