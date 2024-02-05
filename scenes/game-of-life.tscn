@@ -1,0 +1,105 @@
+[gd_scene load_steps=12 format=3 uid="uid://b2ggo2gcy0jkw"]
+
+[ext_resource type="Script" path="res://src/game_of_life.gd" id="1_3mhql"]
+[ext_resource type="Shader" path="res://shaders/bit_matrix.gdshader" id="2_f8duc"]
+[ext_resource type="Texture2D" uid="uid://bkf44m1nh8mw3" path="res://images/alive.png" id="3_2nbhm"]
+[ext_resource type="Texture2D" uid="uid://velbg6214q7b" path="res://images/dead.png" id="4_n85gg"]
+[ext_resource type="Texture2D" uid="uid://b31g1yucr8ele" path="res://images/white_pixel.png" id="5_p65oj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sa8je"]
+resource_local_to_scene = true
+shader = ExtResource("2_f8duc")
+shader_parameter/gridWidth = 512
+shader_parameter/cellSize = null
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3lxff"]
+
+[sub_resource type="Sky" id="Sky_rlvci"]
+sky_material = SubResource("ProceduralSkyMaterial_3lxff")
+
+[sub_resource type="Environment" id="Environment_c1ca7"]
+background_mode = 2
+sky = SubResource("Sky_rlvci")
+ambient_light_color = Color(0.8, 0.8, 0.8, 1)
+
+[sub_resource type="TorusMesh" id="TorusMesh_qgkix"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_xln1s"]
+top_radius = 5.0
+bottom_radius = 5.0
+height = 0.1
+
+[node name="GameOfLife" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_3mhql")
+compute_shader = "res://shaders/compute.glsl"
+square_size = 254
+alive_texture = ExtResource("3_2nbhm")
+dead_texture = ExtResource("4_n85gg")
+
+[node name="2DViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Viewport2D" type="SubViewport" parent="2DViewportContainer"]
+unique_name_in_owner = true
+disable_3d = true
+own_world_3d = true
+handle_input_locally = false
+size = Vector2i(1024, 1024)
+size_2d_override = Vector2i(1024, 1024)
+render_target_update_mode = 4
+
+[node name="ViewportSprite" type="Sprite2D" parent="2DViewportContainer/Viewport2D"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_sa8je")
+scale = Vector2(1024, 1024)
+texture = ExtResource("5_p65oj")
+centered = false
+
+[node name="3DViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1024.0
+offset_right = 2048.0
+offset_bottom = 1024.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="Viewport3D" type="SubViewport" parent="3DViewportContainer"]
+handle_input_locally = false
+size = Vector2i(1024, 1024)
+render_target_update_mode = 4
+
+[node name="3D" type="Node3D" parent="3DViewportContainer/Viewport3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="3DViewportContainer/Viewport3D/3D"]
+environment = SubResource("Environment_c1ca7")
+
+[node name="Camera3D" type="Camera3D" parent="3DViewportContainer/Viewport3D/3D"]
+transform = Transform3D(1, 0, 0, 0, 0.573576, 0.819152, 0, -0.819152, 0.573576, 0, 1.58, 1.35)
+current = true
+fov = 55.0
+size = 1.65
+
+[node name="Torus" type="MeshInstance3D" parent="3DViewportContainer/Viewport3D/3D"]
+unique_name_in_owner = true
+mesh = SubResource("TorusMesh_qgkix")
+skeleton = NodePath("../../../..")
+
+[node name="Base" type="MeshInstance3D" parent="3DViewportContainer/Viewport3D/3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.312553, 0)
+mesh = SubResource("CylinderMesh_xln1s")
+skeleton = NodePath("../../../..")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="3DViewportContainer/Viewport3D/3D"]
+transform = Transform3D(1, 0, 0, 0, -0.268449, 0.963294, 0, -0.963294, -0.268449, 0, 4.06408, 4.80318)
+light_energy = 0.5
+light_bake_mode = 1
+shadow_enabled = true
+shadow_blur = 1.727
