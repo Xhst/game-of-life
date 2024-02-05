@@ -66,8 +66,12 @@ func _get_input_image() -> Image:
 
 
 func _get_noise_image() -> Image:
+	var rng = RandomNumberGenerator.new()
+	
 	var noise = FastNoiseLite.new()
+	noise.noise_type = FastNoiseLite.TYPE_SIMPLEX_SMOOTH
 	noise.frequency = noise_frequency
+	noise.seed = rng.randi()
 	
 	return noise.get_image(square_size, square_size)
 
