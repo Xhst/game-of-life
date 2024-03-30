@@ -31,10 +31,19 @@ in other words, is a unique interior point or $x$ and $y$ are on two opposite si
 
 With this equivalence relation, we can define the quotient space $S / {∼_T}$ wich is a topological torus.
 
-![Topologiacl torus construction from a square](./images/screenshots/torus-construction.png)
+![Topological torus construction from a square](./images/screenshots/torus-construction.png)
 
 In the case of this project, the field of the game is a two-dimensional finite grid on a square that is converted to a texture and mapped onto the Euclidean torus.
 
+## 🧮 Computation
+Because each iteration of the game of life can require many calculations, particularly if very large grids are used, these are performed in parallel with the **Iterative Stencil Loops** pattern using a **9-point 2D stencil**.
+
+An iterative stencil loop refers to a technique used to update the state of each cell in the grid based on the states of its neighboring cells. The "stencil" refers to the pattern of neighboring cells that are considered when updating each cell's state.
+
+Two grids are initialized, one representing the current state of the cells and the other representing the next state, both grids have the same size.
+Rules are applied to each cell to calculate the next state grid.
+Once all cells have been updated, the current state grid is swapped with the next state grid. This ensures that the changes made in the current iteration are reflected in the next iteration.
+This is repeated for each iteration
 ## 🖼️ Screenshots
 #### Simulation with the sample "Gosper's gliders cannon"
 ![screenshot 128 cells](./images/screenshots/screenshot-gosper-glider.png)
