@@ -7,7 +7,6 @@ Compute shader for cellular automaton simulation.
 This shader calculates the next state of each cell in a grid-based cellular automaton
 simulation using Conway's Game of Life rules. It reads the current state of cells
 from an input image and writes the next state to an output image.
-
 */
 
 // Colors representing alive and dead cells
@@ -19,6 +18,7 @@ layout (local_size_x = 32, local_size_y = 32, local_size_z = 1) in;
 
 // Buffer binding for grid size
 layout(set = 0, binding = 0, std430) restrict buffer grid_buffer {
+    // size[0] is the grid size X, size[1] is the grid size Y
     int size[];
 }
 grid;
@@ -34,19 +34,19 @@ bool is_cell_alive(int x, int y) {
 }
 
 // Function to count alive neighbors of a cell
-int count_alive_neighbours(int x, int y) {
+int count_alive_neighbors(int x, int y) {
     int count = 0;
 
     for (int i = -1; i <= 1; i++) {
         for (int j = -1; j <= 1; j++) {
-            if ( i == 0 && j == 0) continue;
+            if (i == 0 && j == 0) continue;
 
-            int neighbour_x = (x + i + grid.size[0]) % grid.size[0];
-            int neighbour_y = (y + j + grid.size[1]) % grid.size[1];
-            
-            vec4 pixel = imageLoad(input_image, ivec2(neighbour_x, neighbour_y));
+            int neighbor_x = (x + i + grid.size[0]) % grid.size[0];
+            int neighbor_y = (y + j + grid.size[1]) % grid.size[1];
 
-            count += int(is_cell_alive(neighbour_x, neighbour_y));
+            vec4 pixel = imageLoad(input_image, ivec2(neighbor_x, neighbor_y));
+
+            count += int(is_cell_alive(neighbor_x, neighbor_y));
         }
     }
 
@@ -59,11 +59,11 @@ void main() {
 
     if (pos.x >= grid.size[0] || pos.y >= grid.size[1]) return;
 
-    int alive_neighbours = count_alive_neighbours(pos.x, pos.y);
+    int alive_neighbors = count_alive_neighbors(pos.x, pos.y);
     bool is_alive = is_cell_alive(pos.x, pos.y);
 
     // Apply Conway's Game of Life rules
-    bool next_state = is_alive && !(alive_neighbours < 2 || alive_neighbours > 3) || (!is_alive && alive_neighbours == 3);
+    bool next_state = is_alive && !(alive_neighbors < 2 || alive_neighbors > 3) || (!is_alive && alive_neighbors == 3);
     
     vec4 color = next_state ? alive_color : dead_color;
     
