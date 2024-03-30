@@ -20,15 +20,20 @@ At each step one of the following actions occurs:
 > The Game of Life is Turing Complete! 🤩
 
 ## 🍩 Torus
-Usually the Game of Life universe is defined as an infinite, two-dimensional, orthogonal grid of square cells, in this case it is defined on a topological torus.
+Usually the Game of Life universe is defined as an infinite, two-dimensional, orthogonal grid of square cells, it can also be defined on a topological torus.
 
 A topological torus is a topological space homeomorphic to a torus in Euclidean space. It can be defined as the product of two circumferences $C^1 \times C^2$
 or equivalently consider a square and "glue" the opposite sides together. This corresponds to defining on the square 
 $$S = [0, 1] \times [0,1] \subseteq \\mathbb{R}^2$$
-the equivalence relation $∼_T$ such that \forall\ p \in [0,1]\ and\ B \in \\{0,1\\}
+the equivalence relation $∼_T$ such that $\forall\ p \in [0,1]$ and $B \in \\{0,1\\}$
 $$x ∼_T y \Longleftrightarrow \bigg(x = y\bigg)\ \lor \bigg(x=(B,p) \land y=(1 - B,p) \bigg) \lor \bigg(x=(p,B) \land y=(p,1 - B) \bigg)$$
-in other words, is a unique interior point or $x$ and $y$ are on two opposite sides and have an equal coordinate. 
-With this equivalence relation, one can define the quotient space $S / {∼_T}$ wich is a topological torus.
+in other words, is a unique interior point or $x$ and $y$ are on two opposite sides and have an equal coordinate.
+
+With this equivalence relation, we can define the quotient space $S / {∼_T}$ wich is a topological torus.
+
+![Topologiacl torus construction from a square](./images/screenshots/torus-construction.png)
+
+In the case of this project, the field of the game is a two-dimensional finite grid on a square that is converted to a texture and mapped onto the Euclidean torus.
 
 ## 🖼️ Screenshots
 #### Simulation with the sample "Gosper's gliders cannon"
