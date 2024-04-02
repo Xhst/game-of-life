@@ -55,11 +55,11 @@ int count_alive_neighbors(int x, int y) {
 
 // Main entry point of the compute shader
 void main() {
+    // Get the cell position
     ivec2 pos = ivec2(gl_GlobalInvocationID.xy);
 
-    if (pos.x >= grid.size[0] || pos.y >= grid.size[1]) return;
-
     int alive_neighbors = count_alive_neighbors(pos.x, pos.y);
+    
     bool is_alive = is_cell_alive(pos.x, pos.y);
 
     // Apply Conway's Game of Life rules
