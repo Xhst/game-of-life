@@ -14,7 +14,7 @@ loading compute shaders, setting up rendering materials, and executing the simul
 var update_every_ms: int = 200
 """int: Time interval between updates of the simulation, in milliseconds."""
 
-@export_file
+@export_file('*.glsl')
 var compute_shader: String
 """str: Path to the compute shader file."""
 
