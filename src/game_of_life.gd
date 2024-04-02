@@ -30,13 +30,15 @@ var alive_texture: Texture2D
 var dead_texture: Texture2D
 """Texture2D: Texture representing dead cells."""
 
-@export
-var binary_data_texture: Texture2D
-"""Texture2D: Optional binary data texture for initial state."""
-
 @export_range(0.0, 1.0)
 var noise_frequency: float
 """float: Frequency of noise for generating random initial state."""
+
+@export
+var sample: Sample.Name
+"""Same.Name: sample for initial state."""
+
+var binary_data_texture: Texture2D
 
 # References to nodes in the scene
 @onready var viewport: Viewport = %Viewport2D
@@ -86,6 +88,8 @@ func _get_input_image() -> Image:
 	Returns:
 		Image: The input image for the simulation.
 	"""
+	binary_data_texture = Sample.texture_from_name(sample)
+	
 	if binary_data_texture == null:
 		return _get_noise_image()
 	
