@@ -3,7 +3,8 @@ enum Name {
 	NONE,
 	GLIDER,
 	GOSPER_GLIDER_CANNON,
-	PULSAR
+	PULSAR,
+	BLOCKLAYING_SWITCH_ENGINE_1
 }
 
 static func texture_from_name(name: Sample.Name) -> Texture2D:
