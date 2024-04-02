@@ -18,7 +18,7 @@ var update_every_ms: int = 200
 var compute_shader: String
 """str: Path to the compute shader file."""
 
-@export
+@export_range(32, 2048)
 var square_size: int
 """int: Size of the square grid for the simulation."""
 
