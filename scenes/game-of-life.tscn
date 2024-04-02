@@ -1,9 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://b2ggo2gcy0jkw"]
+[gd_scene load_steps=12 format=3 uid="uid://b2ggo2gcy0jkw"]
 
 [ext_resource type="Script" path="res://src/game_of_life.gd" id="1_3mhql"]
 [ext_resource type="Shader" path="res://shaders/bit_matrix.gdshader" id="2_f8duc"]
 [ext_resource type="Texture2D" uid="uid://bkf44m1nh8mw3" path="res://images/alive.png" id="3_2nbhm"]
-[ext_resource type="Texture2D" uid="uid://dcifynsg5wlxj" path="res://images/samples/pulsar.png" id="4_0nvrn"]
 [ext_resource type="Texture2D" uid="uid://velbg6214q7b" path="res://images/dead.png" id="4_n85gg"]
 [ext_resource type="Texture2D" uid="uid://b31g1yucr8ele" path="res://images/white_pixel.png" id="5_p65oj"]
 
@@ -37,10 +36,9 @@ anchors_preset = 0
 script = ExtResource("1_3mhql")
 update_every_ms = 250
 compute_shader = "res://shaders/compute.glsl"
-square_size = 64
+square_size = 1024
 alive_texture = ExtResource("3_2nbhm")
 dead_texture = ExtResource("4_n85gg")
-binary_data_texture = ExtResource("4_0nvrn")
 noise_frequency = 0.222
 
 [node name="2DViewportContainer" type="SubViewportContainer" parent="."]

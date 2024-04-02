@@ -221,15 +221,15 @@ func _create_texture_and_bind_uniform(image: Image, format: RDTextureFormat, bin
 
 func _game_process() -> void:
 	"""Main game loop controlling the update and rendering."""
+	var timer = Timer.new()
+	timer.wait_time = float(update_every_ms) / 1000.0
+	add_child(timer)
+	
 	while (true):
 		_update()
-		await sleep(update_every_ms)
+		timer.start()
+		await timer.timeout
 		_render()
-
-
-func sleep(ms: int):
-	"""Sleep function to control update frequency."""
-	await get_tree().create_timer(float(ms) / 1000.0).timeout 
 
 
 func _update() -> void:
