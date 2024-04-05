@@ -142,12 +142,12 @@ func _set_shader_material_from_output_image() -> void:
 		return
 		
 	var cell_size = int(alive_texture.get_size().x);
-	
-	material.set_shader_parameter("deadTexture", dead_texture)
-	material.set_shader_parameter("aliveTexture", alive_texture)
-	material.set_shader_parameter("binaryDataTexture", render_texture)
-	material.set_shader_parameter("gridWidth", square_size)
-	material.set_shader_parameter("cellSize", cell_size)
+
+	material.set_shader_parameter("dead_texture", dead_texture)
+	material.set_shader_parameter("alive_texture", alive_texture)
+	material.set_shader_parameter("binary_data_texture", render_texture)
+	material.set_shader_parameter("grid_width", square_size)
+	material.set_shader_parameter("cell_size", cell_size)
 
 
 func _set_tourus_viewport_material() -> void:

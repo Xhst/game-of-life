@@ -9,8 +9,8 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sa8je"]
 resource_local_to_scene = true
 shader = ExtResource("2_f8duc")
-shader_parameter/gridWidth = 512
-shader_parameter/cellSize = null
+shader_parameter/grid_width = null
+shader_parameter/cell_size = null
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3lxff"]
 
