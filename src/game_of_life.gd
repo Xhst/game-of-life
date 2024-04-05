@@ -36,7 +36,7 @@ var noise_frequency: float
 
 @export
 var sample: Sample.Name
-"""Same.Name: sample for initial state."""
+"""Sample.Name: sample for initial state."""
 
 var binary_data_texture: Texture2D
 
