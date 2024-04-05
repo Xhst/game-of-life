@@ -35,22 +35,14 @@ bool is_cell_alive(int x, int y) {
 
 // Function to count alive neighbors of a cell
 int count_alive_neighbors(int x, int y) {
-    int count = 0;
-
-    for (int i = -1; i <= 1; i++) {
-        for (int j = -1; j <= 1; j++) {
-            if (i == 0 && j == 0) continue;
-
-            int neighbor_x = (x + i + grid.size[0]) % grid.size[0];
-            int neighbor_y = (y + j + grid.size[1]) % grid.size[1];
-
-            vec4 pixel = imageLoad(input_image, ivec2(neighbor_x, neighbor_y));
-
-            count += int(is_cell_alive(neighbor_x, neighbor_y));
-        }
-    }
-
-    return count;
+    return int(is_cell_alive(x, y - 1)) + // north
+           int(is_cell_alive(x + 1, y - 1)) + // northeast
+           int(is_cell_alive(x + 1, y)) + // east
+           int(is_cell_alive(x + 1, y + 1)) + // southeast
+           int(is_cell_alive(x, y + 1)) + // south
+           int(is_cell_alive(x - 1, y + 1)) + // southwest
+           int(is_cell_alive(x - 1, y)) + // west
+           int(is_cell_alive(x - 1, y - 1)); // northwest
 }
 
 // Main entry point of the compute shader
