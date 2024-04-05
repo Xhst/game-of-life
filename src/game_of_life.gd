@@ -9,17 +9,23 @@ loading compute shaders, setting up rendering materials, and executing the simul
 
 """
 
+# Constants for range values
+const UPDATE_INTERVAL_MIN = 1
+const UPDATE_INTERVAL_MAX = 1000
+const SQUARE_SIZE_MIN = 32
+const SQUARE_SIZE_MAX = 2048
+
 # Exported variables
-@export_range(1, 1000)
+@export_range(UPDATE_INTERVAL_MIN, UPDATE_INTERVAL_MAX)
 var update_every_ms: int = 200
 """int: Time interval between updates of the simulation, in milliseconds."""
 
 @export_file('*.glsl')
-var compute_shader: String
+var compute_shader: String = ""
 """str: Path to the compute shader file."""
 
-@export_range(32, 2048)
-var square_size: int
+@export_range(SQUARE_SIZE_MIN, SQUARE_SIZE_MAX)
+var square_size: int = SQUARE_SIZE_MIN
 """int: Size of the square grid for the simulation."""
 
 @export
